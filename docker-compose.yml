@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  s3:
+    image: docker.arvancloud.ir/minio/minio
+    restart: always
+    ports:
+      - "9001:9000"
+      - "9002:9001"
+    volumes:
+      - minio_strage:/data
+    environment:
+      MINIO_ACCESS_KEY: minio_access_key
+      MINIO_SECRET_KEY: minio_secret_key
+      MINIO_ROOT_USER: miniouser
+      MINIO_ROOT_PASSWORD: miniopass 
+    command: server --console-address ":9001" /data
+
+volumes:
+  minio_strage:
